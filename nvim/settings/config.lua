@@ -13,3 +13,5 @@ vim.cmd([[ set softtabstop=2 ]])
 vim.cmd([[ set softtabstop=2 ]])
 vim.cmd([[ set guicursor= ]])
 vim.cmd([[ syntax on]])
+vim.o.background = "dark"
+vim.cmd([[ colorscheme gruvbox]])

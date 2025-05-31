@@ -1,5 +1,5 @@
-require("settings/config");
-require("lua.lazy");
+require("lua.lazy")
+require("settings.config")
 
 
 

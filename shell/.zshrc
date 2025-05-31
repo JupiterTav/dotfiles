@@ -2,3 +2,4 @@
 source /usr/share/zsh-antidote/antidote.zsh
 antidote load
 eval "$(starship init zsh)"
+alias ls=exa
