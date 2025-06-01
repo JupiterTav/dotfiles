@@ -1,0 +1,70 @@
+return {
+  'saghen/blink.cmp',
+  -- optional: provides snippets for the snippet source
+  dependencies = { 'rafamadriz/friendly-snippets', { 'onsails/lspkind.nvim', lazy = true }},
+  version = '1.*',
+    opts = {
+      keymap = { 
+        preset = 'default',
+        ['<Tab>'] = {'select_next', 'fallback'},
+        ['<S-Tab>'] = {'select_prev', 'fallback'},
+        ['<Enter>'] = {'accept', 'fallback'},
+      },
+    appearance = {
+      nerd_font_variant = 'mono'
+    },
+    -- (Default) Only show the documentation popup when manually triggered
+
+    completion = {
+      menu = {
+        draw = {
+          components = {
+            kind_icon = {
+              text = function(ctx)
+                local icon = ctx.kind_icon
+                if vim.tbl_contains({ "Path" }, ctx.source_name) then
+                    local dev_icon, _ = require("nvim-web-devicons").get_icon(ctx.label)
+                    if dev_icon then
+                        icon = dev_icon
+                    end
+                else
+                    icon = require("lspkind").symbolic(ctx.kind, {
+                        mode = "symbol",
+                    })
+                end
+    
+                return icon .. ctx.icon_gap
+              end,
+    
+              highlight = function(ctx)
+                local hl = ctx.kind_hl
+                if vim.tbl_contains({ "Path" }, ctx.source_name) then
+                  local dev_icon, dev_hl = require("nvim-web-devicons").get_icon(ctx.label)
+                  if dev_icon then
+                    hl = dev_hl
+                  end
+                end
+                return hl
+              end,
+            }
+          }
+        }
+      }
+    },
+
+    sources = {
+      default = { 'lsp', 'path', 'snippets', 'buffer' },
+      provides = {
+        nerdfont = {
+          module = "blink-nerdfont",
+          name = "Nerd Fonts",
+          score_offset = 15,
+          opts = { insert = true, },
+        },
+      },
+    },
+
+   fuzzy = { implementation = "prefer_rust_with_warning" }
+  },
+  opts_extend = { "sources.default" }
+}
