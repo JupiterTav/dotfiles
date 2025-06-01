@@ -1,6 +1,8 @@
 return {
   'saghen/blink.cmp',
-  dependencies = { 'rafamadriz/friendly-snippets', { 'onsails/lspkind.nvim', lazy = true }},
+  dependencies = { 'rafamadriz/friendly-snippets', 
+    { 'onsails/lspkind.nvim', lazy = true }
+  },
   version = '1.*',
     opts = {
       keymap = { 
@@ -12,7 +14,6 @@ return {
     appearance = {
       nerd_font_variant = 'mono'
     },
-
     completion = {
       menu = {
         draw = {
@@ -21,7 +22,8 @@ return {
               text = function(ctx)
                 local icon = ctx.kind_icon
                 if vim.tbl_contains({ "Path" }, ctx.source_name) then
-                    local dev_icon, _ = require("nvim-web-devicons").get_icon(ctx.label)
+                    local dev_icon, _ = require("nvim-web-devicons")
+                                                    .get_icon(ctx.label)
                     if dev_icon then
                         icon = dev_icon
                     end
@@ -37,7 +39,8 @@ return {
               highlight = function(ctx)
                 local hl = ctx.kind_hl
                 if vim.tbl_contains({ "Path" }, ctx.source_name) then
-                  local dev_icon, dev_hl = require("nvim-web-devicons").get_icon(ctx.label)
+                  local dev_icon, dev_hl = require("nvim-web-devicons")
+                                                      .get_icon(ctx.label)
                   if dev_icon then
                     hl = dev_hl
                   end
