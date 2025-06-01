@@ -1,6 +1,5 @@
 return {
   'saghen/blink.cmp',
-  -- optional: provides snippets for the snippet source
   dependencies = { 'rafamadriz/friendly-snippets', { 'onsails/lspkind.nvim', lazy = true }},
   version = '1.*',
     opts = {
@@ -13,7 +12,6 @@ return {
     appearance = {
       nerd_font_variant = 'mono'
     },
-    -- (Default) Only show the documentation popup when manually triggered
 
     completion = {
       menu = {
@@ -54,14 +52,6 @@ return {
 
     sources = {
       default = { 'lsp', 'path', 'snippets', 'buffer' },
-      provides = {
-        nerdfont = {
-          module = "blink-nerdfont",
-          name = "Nerd Fonts",
-          score_offset = 15,
-          opts = { insert = true, },
-        },
-      },
     },
 
    fuzzy = { implementation = "prefer_rust_with_warning" }

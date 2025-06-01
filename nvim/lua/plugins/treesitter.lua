@@ -18,9 +18,6 @@ return {
           node_decremental = "<Leader>vm",
         },
       },
-      indent = {
-        enable = true,
-      },
     }
   end,
 }
