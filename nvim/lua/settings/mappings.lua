@@ -19,4 +19,4 @@ map('n', '<A-0>', '<Cmd>BufferLast<CR>', tab_opts)
 -- TELESCOPE
 local telescope = require('telescope.builtin')
 vim.keymap.set('n', '<leader>ff', telescope.find_files, {desc = 'Telescope find files'})
-vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Telescope buffers' })
+vim.keymap.set('n', '<leader>fb', telescope.buffers, { desc = 'Telescope buffers' })
