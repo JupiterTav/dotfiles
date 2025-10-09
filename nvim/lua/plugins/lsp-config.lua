@@ -1,9 +1,9 @@
 return {
-  "mason-org/mason.nvim",
+  "mason-org/mason-lspconfig.nvim",
   opts = {},
     dependencies = {
       {
-          "mason-org/mason-lspconfig.nvim",
+          "mason-org/mason.nvim",
           opts = {
               ensure_installed = { "clangd", "lua_ls"},
               automatic_installation = false,
