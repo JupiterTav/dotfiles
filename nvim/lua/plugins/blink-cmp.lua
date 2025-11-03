@@ -1,22 +1,24 @@
 return {
   'saghen/blink.cmp',
-  dependencies = { 'rafamadriz/friendly-snippets', 
+  dependencies = { 'rafamadriz/friendly-snippets',
     { 'onsails/lspkind.nvim', lazy = true }
   },
   version = '1.*',
-    opts = {
-      keymap = { 
+  opts = {
+      keymap = {
         preset = 'default',
         ['<Tab>'] = {'select_next', 'fallback'},
         ['<S-Tab>'] = {'select_prev', 'fallback'},
         ['<Enter>'] = {'accept', 'fallback'},
       },
     appearance = {
-      nerd_font_variant = 'mono'
-    },
+        nerd_font_variant = 'mono'
+      },
     completion = {
+      documentation = { auto_show = true},
       menu = {
         draw = {
+          treesitter = {'lsp'},
           components = {
             kind_icon = {
               text = function(ctx)
@@ -32,10 +34,8 @@ return {
                         mode = "symbol",
                     })
                 end
-    
                 return icon .. ctx.icon_gap
               end,
-    
               highlight = function(ctx)
                 local hl = ctx.kind_hl
                 if vim.tbl_contains({ "Path" }, ctx.source_name) then
@@ -46,18 +46,35 @@ return {
                   end
                 end
                 return hl
-              end,
+              end
+              }
             }
           }
-        }
-      }
+        },
+      list = {
+        selection = {
+          preselect = false, auto_insert = true
+          },
+      },
+      ghost_text = {
+        enabled = true, show_with_menu = true,
+      },
     },
-
     sources = {
-      default = { 'lsp', 'path', 'snippets', 'buffer' },
+--      default = { 'lsp', 'path', 'snippets', 'buffer' },
+      providers = {
+        buffer = {
+          opts = {
+            get_bufnrs = function()
+              return vim.tbl_filter(function(bufnr)
+                return vim.bo[bufnr].buftype == ''
+              end, vim.api.nvim_list_bufs())
+            end
+          },
+        },
+      },
     },
-
-   fuzzy = { implementation = "prefer_rust_with_warning" }
-  },
-  opts_extend = { "sources.default" }
+    fuzzy = { implementation = "prefer_rust_with_warning" },
+    opts_extend = { "sources.default" },
+  }
 }
