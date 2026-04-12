@@ -12,6 +12,7 @@ vim.cmd([[ set shiftwidth=2 ]])
 vim.cmd([[ set softtabstop=2 ]])
 vim.cmd([[ set softtabstop=2 ]])
 vim.cmd([[ set guicursor= ]])
+vim.o.winborder = "rounded"
 vim.cmd([[ syntax on]])
 vim.o.background = "dark"
-vim.cmd([[ colorscheme gruvbox]])
+vim.cmd([[ colorscheme koda]])

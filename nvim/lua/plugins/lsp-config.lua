@@ -5,8 +5,12 @@ return {
       {
           "mason-org/mason.nvim",
           opts = {
-              ensure_installed = { "clangd", "lua_ls"},
+              ensure_installed = {
+                "clangd",
+                "lua_ls"
+              },
               automatic_installation = false,
+
             },
           lazy = true,
       },

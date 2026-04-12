@@ -3,7 +3,7 @@ return {
 
     opts = function()
       local line = require("lualine")
-      local colors = {
+      local _colors = {
   bg       = '#3c3836',
   fg       = '#fbf1c7',
   yellow   = '#d79921',
@@ -16,7 +16,7 @@ return {
   blue     = '#83a598',
   red      = '#ec5f67',
 }
-
+      local colors = require("koda").get_palette("dark")
 local conditions = {
   buffer_not_empty = function()
     return vim.fn.empty(vim.fn.expand('%:t')) ~= 1
