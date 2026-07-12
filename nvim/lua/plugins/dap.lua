@@ -12,6 +12,7 @@ return {
       local dapui = require("dapui")
       local dap_python = require("dap-python")
 
+
       require("dapui").setup({})
       require("nvim-dap-virtual-text").setup({
         commented = true, -- Show virtual text alongside comment
@@ -19,6 +20,31 @@ return {
 
       dap_python.setup("python3")
       dap_python.test_runner = 'pytest'
+
+      dap.adapters.codelldb = {
+  type = 'server',
+  port = "${port}",
+  executable = {
+    args = {"--port", "${port}"},
+  }
+}
+
+-- Configure C++ settings
+dap.configurations.cpp = {
+  {
+    name = "Launch file",
+    type = "codelldb",
+    request = "launch",
+    program = function()
+      return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+    end,
+    cwd = '${workspaceFolder}',
+    stopOnEntry = false,
+  },
+}
+
+-- Replicate configurations for C and Rust
+dap.configurations.c = dap.configurations.cpp
 
       vim.fn.sign_define("DapBreakpoint", {
         text = "",

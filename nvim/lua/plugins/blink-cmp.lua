@@ -2,6 +2,7 @@
 return {
   'saghen/blink.cmp',
   dependencies = { 
+    'saghen/blink.lib',
     'rafamadriz/friendly-snippets',
     {
       'onsails/lspkind.nvim',
@@ -9,7 +10,6 @@ return {
     },
      "mgalliou/blink-cmp-tmux"
   },
-  version = '1.*',
   ---@module 'blink.cmp'
   ---@type blink.cmp.Config,
   opts = {
@@ -41,11 +41,12 @@ return {
       },
     appearance = {
         nerd_font_variant = 'mono',
-        use_nvim_cmp_as_default = true,
+        use_nvim_cmp_as_default = false,
       },
     completion = {
       documentation = {
-        auto_show = false
+        auto_show = false,
+        window = {border ='rounded'},
       },
 
       list = {
@@ -55,7 +56,7 @@ return {
           },
       },
       ghost_text = {
-        enabled = false,
+        enabled = true,
         show_with_menu = false,
       },
 
@@ -63,9 +64,10 @@ return {
       menu = {
         auto_show = true,
         auto_show_delay_ms = 250,
+        border = "rounded",
         draw = {
-          treesitter = {'lsp'},
-          columns = { {"kind_icon", "kind"}, { "label", "label_description", gap = 1} },
+            treesitter = {'lsp'},
+            columns = {{ "label", "label_description", gap = 1}, {"kind_icon"}},
           components = {
             label = {
               text = function (ctx)
@@ -104,29 +106,10 @@ return {
               },
             },
           },
---[[          direction_priority = function()
-            local ctx = require('blink.cmp').get_context()
-            local item = require('blink.cmp').get_selected_item()
-            if ctx == nil or item == nil then return { 's', 'n' } end
-
-            local item_text = item.textEdit ~= nil and item.textEdit.newText or item.insertText or item.label
-            local is_multi_line = item_text:find('\n') ~= nil
-
-            -- after showing the menu upwards, we want to maintain that direction
-            -- until we re-open the menu, so store the context id in a global variable
-            if is_multi_line or vim.g.blink_cmp_upwards_ctx_id == ctx.id then
-              vim.g.blink_cmp_upwards_ctx_id = ctx.id
-              return { 'n', 's' }
-            end
-            return { 's', 'n' }
-          end--]]
         },
      },
     sources = {
-      default = function (ctx)
-       local success, node = pcall(vim.treesitter.get_node)
-          return {'lsp', 'path', 'snippets', 'buffer', 'tmux', 'lazydev'}
-      end,
+      default =  {'lsp', 'path', 'snippets', 'buffer', 'tmux', 'lazydev'},
       providers = {
         lsp = {
           enabled = true,
@@ -154,10 +137,15 @@ return {
           module = "lazydev.integrations.blink",
           score_offset = 100,
         },
+        snippets = {
+            should_show_items = function(ctx)
+              return ctx.trigger.initial_kind ~= 'trigger_character'
+            end,
+        },
       },
     },
     fuzzy = {
-      implementation = "prefer_rust_with_warning",
+      implementation = "prefer_rust",
       sorts = {
         'score',
         'sort_text',
@@ -168,6 +156,7 @@ return {
       enabled = true,
       window = {
         show_documentation = true,
+        border = "bold",
       },
     },
   },

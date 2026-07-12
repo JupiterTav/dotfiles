@@ -16,15 +16,19 @@ return {
       lazy = false, -- make sure we load this during startup if it is your main colorscheme
       priority = 1000, -- make sure to load this before all the other start plugins
       config = function()
-		require("koda").setup({
-			transparent = false,
+	    require("koda").setup({
+		    transparent = false,
 			auto = true,
 			cache = true,
 
-      theme = {
-        dark = "dark",
-        light = "light"
-      }
+            theme = {
+                dark = "dark",
+                light = "light"
+            },
+            foreground = {
+                dark = "saturated",
+                light = "saturated"
+            },
 		})        -- require("koda").setup({ transparent = true })
       end,
   },
