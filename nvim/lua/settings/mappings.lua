@@ -16,8 +16,16 @@ map('n', '<A-8>', '<Cmd>BufferGoto 8<CR>', tab_opts)
 map('n', '<A-9>', '<Cmd>BufferGoto 9<CR>', tab_opts)
 map('n', '<A-0>', '<Cmd>BufferLast<CR>', tab_opts)
 
+--NEOTREE
+map('n', '<leader>nt', '<Cmd>Neotree toggle<CR>', tab_opts)
+
+
 -- LSP
 map('n', 'gl', '<Cmd>:lua vim.diagnostic.open_float()<CR>', tab_opts)
+vim.keymap.set('n', '<leader>tw', function()
+  local current = vim.diagnostic.config().virtual_text
+  vim.diagnostic.config({ virtual_text = not current })
+end, { desc = "Toggle Diagnostic Virtual Text" })
 -- TELESCOPE
 local telescope = require('telescope.builtin')
 vim.keymap.set('n', '<leader>ff', telescope.find_files, {desc = 'Telescope find files'})
@@ -32,3 +40,25 @@ function _lazygit_toggle()
 end
 
 vim.api.nvim_set_keymap("n", '<leader><C-L>', '<Cmd>lua _lazygit_toggle()<CR>', tab_opts)
+
+ -- NeoTest 
+local neotest = require("neotest")
+ vim.keymap.set('n', '<leader>Tr', function()
+   neotest.run.run() 
+ end, {desc = 'Run the nearest test'})
+ vim.keymap.set('n', '<leader>Tc', function()
+   neotest.run.run(vim.fn.expand("%"))
+ end, {desc = 'Run tests in current file'})
+ vim.keymap.set('n', '<leader>Td', function()
+  neotest.run.run({strategy = "dap"})
+end, {desc = 'Debug the nearest test'})
+ vim.keymap.set('n', '<leader>Ts', function()
+   neotest.run.stop()
+ end, {desc="stop nearest test"})
+ vim.keymap.set('n', '<leader>Tt', function ()
+   neotest.watch.toggle(vim.fn.expand("%"))  
+ end, {desc="toggle watch"})
+ vim.keymap.set('n', '<leader>Ts', function()
+  neotest.summary.toggle()
+end, {desc="toggle test summary"})
+
