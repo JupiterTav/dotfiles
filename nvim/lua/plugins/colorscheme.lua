@@ -27,5 +27,31 @@ return {
       }
 		})        -- require("koda").setup({ transparent = true })
       end,
+  },
+
+  {
+    "saeeedhany/parchment.nvim",
+    priority = 1000,
+  },
+  {
+    "rebelot/kanagawa.nvim",
+    priority = 1000,
+  },
+  {
+    "webhooked/kanso.nvim",
+    lazy = false,
+    config = function ()
+      foreground = {
+        dark = "default"
+      }
+    end,
+    priority = 1000,
+  },
+  {
+  "ankushbhagats/pastel.nvim",
+    lazy = true, -- disable lazy loading 
+    priority = 1000, -- load immediately at startup
+    opts = {}, -- your configuration comes here
+    config = true -- call setup function with provided opts
   }
 }

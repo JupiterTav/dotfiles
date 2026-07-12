@@ -1,7 +1,7 @@
 return {
     'nvim-lualine/lualine.nvim',
 
-    opts = function()
+    opts = function(_, opts)
       local line = require("lualine")
       local _colors = {
   bg       = '#3c3836',
@@ -16,8 +16,10 @@ return {
   blue     = '#83a598',
   red      = '#ec5f67',
 }
-      local colors = require("koda").get_palette("dark")
-local conditions = {
+     local colors = require("kanso.colors").setup({theme = 'zen'})
+
+
+      local conditions = {
   buffer_not_empty = function()
     return vim.fn.empty(vim.fn.expand('%:t')) ~= 1
   end,

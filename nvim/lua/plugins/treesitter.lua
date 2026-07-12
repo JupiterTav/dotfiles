@@ -20,4 +20,7 @@ return {
       },
     }
   end,
+  dependencies = {
+   "https://github.com/hiphish/rainbow-delimiters.nvim",
+  },
 }
