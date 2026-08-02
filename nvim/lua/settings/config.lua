@@ -19,9 +19,10 @@ vim.opt.updatetime = 250
 vim.o.winborder = "rounded"
 vim.cmd([[ syntax on]])
 vim.o.background = "dark"
-vim.cmd([[ colorscheme kanso-zen]])
+vim.cmd("colorscheme onedark")
 vim.filetype.add({
   extension = {
     hlsl = "hlsl",
+    comp = "comp"
   }
 })

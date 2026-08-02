@@ -1,7 +1,13 @@
 return {
     {
+  "olimorris/onedarkpro.nvim",
+  priority = 1000, -- Ensure it loads first
+},
+{ "catppuccin/nvim", name = "catppuccin", priority = 1000 },
+    {
       "ellisonleao/gruvbox.nvim",
       priority = 1000,
+      lazy = true,
       config = true,
       opts = {
           transparent_mode = false,
@@ -13,7 +19,7 @@ return {
 
     {
       "oskarnurm/koda.nvim",
-      lazy = false, -- make sure we load this during startup if it is your main colorscheme
+      lazy = true, -- make sure we load this during startup if it is your main colorscheme
       priority = 1000, -- make sure to load this before all the other start plugins
       config = function()
 	    require("koda").setup({
@@ -36,14 +42,16 @@ return {
   {
     "saeeedhany/parchment.nvim",
     priority = 1000,
+      lazy = true,
   },
   {
     "rebelot/kanagawa.nvim",
+      lazy = true,
     priority = 1000,
   },
   {
     "webhooked/kanso.nvim",
-    lazy = false,
+    lazy = true,
     config = function ()
       foreground = {
         dark = "default"

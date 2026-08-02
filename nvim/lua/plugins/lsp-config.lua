@@ -15,7 +15,12 @@ return {
           lazy = true,
       },
         "WhoIsSethDaniel/mason-tool-installer.nvim",
+    {
         "neovim/nvim-lspconfig",
+        vim.lsp.config("clangd", {
+            cmd = {"clangd", "--background-index", "--clang-tidy", "--header-insertion=never", "--completion-style=detailed"},
+        })
+    },
       {
           "aznhe21/actions-preview.nvim",
           config = function()

@@ -5,8 +5,8 @@ return {
     end,
    dependencies = {
       {
+          "https://github.com/ya2s/nvim-cursorline",
         'nvim-tree/nvim-web-devicons',     -- optional
-        lazy = true,
       },
     }
 }

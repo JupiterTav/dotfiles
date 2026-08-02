@@ -16,7 +16,7 @@ return {
   blue     = '#83a598',
   red      = '#ec5f67',
 }
-     local colors = require("kanso.colors").setup({theme = 'zen'})
+     local colors = require("lualine.themes.onedark")
 
 
       local conditions = {
@@ -220,4 +220,3 @@ ins_right {
 line.setup(config)
     end,
 }
-
