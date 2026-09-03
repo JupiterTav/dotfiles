@@ -23,6 +23,7 @@ vim.cmd("colorscheme onedark")
 vim.filetype.add({
   extension = {
     hlsl = "hlsl",
-    comp = "comp"
+    comp = "comp",
+    slang = "slang"
   }
 })
